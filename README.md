@@ -1,1 +1,3 @@
-# advent_of_code_2020_lucas_sherwin
+Tracking my progress through the 2020 Advent of Code!
+
+https://adventofcode.com/2020
