@@ -12,14 +12,13 @@ def count_trees(input):
         if(i[idx] == '#'):
             # increase count by 1
             count += 1
-        # check if idx + 3 will be greater than len(i)
-        if((idx+3) > (len(i)-1)):
-            # if so, set idx to be the length - idx
-            idx = (len(i))-idx
-        # otherwise increment idx by 3
+            # print(idx, len(i), i[idx], count)
+
+        if(idx+3 >= len(i)-1):
+            idx = (idx - len(i)) + 4
         else:
             idx += 3
-        print(idx, len(i), i[idx], count)
+
     print(count)
     return count
 
