@@ -28,13 +28,13 @@ def count_yes_part2(input):
     total = 0
 
     # set to keep track of questions everyone answered "yes" to
-    answer = set()
+    answer = set({'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'})
     for i in input:
         if i.strip() != '':
             answer = answer.intersection(set(list(i.strip())))
         else:
             total += len(answer)
-            answer.clear()
+            answer = set({'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'})
     print(total)
     return total
 
