@@ -27,12 +27,15 @@ def count_yes_part2(input):
     # track the total number of questions that everyone answered "yes" to
     total = 0
 
-    # set to keep track of questions everyone answered "yes" to
+    # set with all the letters to keep track
     answer = set({'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'})
     for i in input:
+        # if the line is not empty
         if i.strip() != '':
+            # take the intersection of answer and the current set and save it in answer
             answer = answer.intersection(set(list(i.strip())))
         else:
+            # increment total and reset answer
             total += len(answer)
             answer = set({'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'})
     print(total)
