@@ -13,7 +13,7 @@ def count_yes(input):
     for i in input:
         # if there are characters in the line add them to the set
         if i.strip() != '':
-            answers |= set(i.strip().split())
+            answers |= set(list(i.strip()))
         # if the line is blank
         else:
             # add the length to the total number of questions
@@ -24,7 +24,7 @@ def count_yes(input):
     return total
 
 
-# incorrect: 1608
+# incorrect: 1608, 6668
 
 
 
