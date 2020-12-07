@@ -23,9 +23,27 @@ def count_yes(input):
     print(total)
     return total
 
+def count_yes_part2(input):
+    # track the total number of questions that everyone answered "yes" to
+    total = 0
 
-# incorrect: 1608, 6668
+    # set to keep track of questions everyone answered "yes" to
+    answer = set()
+    for i in input:
+        if i.strip() != '':
+            answer = answer.intersection(set(list(i.strip())))
+        else:
+            total += len(answer)
+            answer.clear()
+    print(total)
+    return total
+
+
+
+# pt1 incorrect: 1608, 6668
 
 
 
 count_yes(input_lines)
+
+count_yes_part2(input_lines)
