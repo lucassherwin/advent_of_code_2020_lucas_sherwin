@@ -1,18 +1,15 @@
 with open('input.txt', 'r') as file:
     input_lines = file.readlines()
 
-# approach:
-# create linked list of all the instructions
-
 # node class for linked list
 class Node:
-    def __init__(self, dataval=None):
-        self.dataval = dataval
-        self.nextval = None
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
 
 class SLinkedList:
     def __init__(self):
-        self.headval = None
+        self.head = None
         
     def Atbegining(self, data_in):
         NewNode = Node(data_in)
@@ -26,8 +23,8 @@ class SLinkedList:
             return
 
         NewNode = Node(newdata)
-        NewNode.nextval = middle_node.nextval
-        middle_node.nextval = NewNode
+        NewNode.next = middle_node.next
+        middle_node.next = NewNode
 
 # Function to remove node
     def RemoveNode(self, Removekey):
@@ -54,24 +51,53 @@ class SLinkedList:
         HeadVal = None
 
 # Print the linked list
-    def listprint(self):
-        printval = self.headval
-        while printval is not None:
-            print (printval.dataval)
-            printval = printval.nextval
+    def LListprint(self):
+        printval = self.head
+        while (printval):
+            print(printval.data),
+            printval = printval.next
 
+    def SearchLList(self, val):
+        current = self.head
+
+        while current != None:
+            if current.data == val:
+                print(current.data)
+                return True
+            current = current.next
+        print('Not found')
+        return False
 
 llist = SLinkedList()
-llist.Atbegining("Mon")
-llist.Atbegining("Tue")
-llist.Atbegining("Wed")
-llist.Atbegining("Thu")
-llist.RemoveNode("Tue")
-llist.LListprint()
+# llist.Atbegining("Mon")
+# llist.Atbegining("Tue")
+# llist.Atbegining("Wed")
+# llist.Atbegining("Thu")
+# llist.RemoveNode("Tue")
+# llist.LListprint()
 
+# create the list
+def create_list_from_input(input):
+    for i in input:
+        # split up input
+        i = i.strip().split()
+        # obj: {key(instruction): value(argument)}
+        inst = i[0]
+        arg = i[1]
+        inst_obj = {inst: arg}
+        # add obj to lined list
+        llist.Atbegining(inst_obj)
 
-
-
-
-# def handheld_halting(input):
-#     for i in input:
+create_list_from_input(input_lines)
+# llist.LListprint()
+llist.SearchLList({'acc': '-2'})
+# instruction set:
+# acc: increase or decrease value in accumulator
+    # EX: acc +7 increase acc by 7
+    # after an acc instruction, the instruction immediately below is exectued
+# jmp: jumps to a new input relative to itself
+    # EX: jmp +2 skip the next instruction
+    # EX: jmp +1 continue to the instruction immediately below it
+    # EX: jmp -20 execute the instruction 20 lines above
+# nop: no operation -- does nothing
+    # the instruction immediately below it is exectued next
