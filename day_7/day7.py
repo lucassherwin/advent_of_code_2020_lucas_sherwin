@@ -53,6 +53,9 @@
 # how_many_bags(input_lines)
 # print('Answer ', bags_count)
 
+
+
+# THIS IS FROM NICK'S GITHUB USE FOR REFERENCE
 import re
 
 filename = "input.txt"
@@ -60,8 +63,9 @@ filename = "input.txt"
 p1sum = 0
 bags = {}
 
-# Recursive function to check if a bag can be traced to "shiny gold"
-def checkBags(bag):
+p2sum = 0
+# Recursive function to check if a bag can be traced to "shiny gold" for part 1
+def check_bags_p1(bag):
     global p1sum
     for bagName, bagVal in bag.items():
 
@@ -70,12 +74,12 @@ def checkBags(bag):
             p1sum += 1
             raise Exception("Found valid bag path")
         elif bags[bagName] != 0:
-            checkBags(bags[bagName])
+            check_bags_p1(bags[bagName])
         else:
             continue
 
 
-def part1():
+def parse_data():
     with open(filename, 'r') as file:
         line = file.readline().strip()
         while line:
@@ -98,6 +102,9 @@ def part1():
                     valBags[tempBagKey] = tempBagNum    # Add this inner bag to the list of bags that can be put in keyBag
             bags[keyBag] = valBags
             line = file.readline().strip()
+
+def part1():
+    parse_data()
     for outerBag in bags.keys():
         if bags[outerBag] != 0:
 
@@ -105,10 +112,29 @@ def part1():
             # checkBags raises exception to break out of recursion if it reaches "shiny gold" at any point, so
             # it will increment the counter and move on to check the next outer bag
             try:
-                checkBags(bags[outerBag])
+                check_bags_p1(bags[outerBag])
             except:
                 continue
+
+
+def check_bags_p2(bag):
+    global p2sum
+    numBags = 0
+    for bagName, bagVal in bag.items():
+        if bags[bagName] != 0:
+            numBags += (bagVal + bagVal * check_bags_p2(bags[bagName]))
+        else:
+            numBags += bagVal
+    return numBags
+
+def part2():
+    parse_data()
+    return check_bags_p2(bags["shiny gold"])
+
+
 
 # Part 1
 part1()
 print("Answer to Part 1: {}".format(p1sum))
+
+print("Answer to Part 2: {}".format(part2()))
