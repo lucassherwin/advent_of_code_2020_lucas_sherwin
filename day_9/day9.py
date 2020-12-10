@@ -33,8 +33,8 @@ def find_num(input):
         # found the bad number
         elif i == len(pre):
             print('bad: ', check_num)
-    return check_num
     print('asdf')
+    return check_num
 
 
 
