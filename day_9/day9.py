@@ -32,9 +32,10 @@ def find_num(input):
             # call the function with new input
             find_num(input)
         # found the bad number
-        elif pre[i] == len(pre):
+        elif i == len(pre):
             print('bad: ', check_num)
     # print('asdf')
+    print(check_num)
     return check_num
 
 
