@@ -39,6 +39,8 @@ try:
 except:
     pass
 
+# TODO:
+# part 2 lmao
 def part2(input, bad_num):
     
 
