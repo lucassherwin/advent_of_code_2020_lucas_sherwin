@@ -22,6 +22,28 @@ def count_trees(input):
     print(count)
     return count
 
+def count_trees_part2(input, right, down):
+    count = 0
+    idx = 0
+    for i in range(0, len(input), down):
+        # print(i)
+        if(input[i][idx] == '#'):
+            count += 1
+        if(idx+right >= len(input[i])-1):
+            idx = (idx - len(input[i])) + (right+1)
+        else:
+            idx += right
+    print(count)
+    return count
+
+run1 = count_trees_part2(lines, 1, 1)
+run2 = count_trees_part2(lines, 3, 1)
+run3 = count_trees_part2(lines, 5, 1)
+run4 = count_trees_part2(lines, 7, 1)
+run5 = count_trees_part2(lines, 1, 2)
 
 
-count_trees(lines)
+
+# count_trees(lines)
+count_trees_part2(lines, 3, 1)
+print(run1*run2*run3*run4*run5)
