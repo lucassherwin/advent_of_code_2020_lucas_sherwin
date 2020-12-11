@@ -1,4 +1,4 @@
-import itertools
+# import itertools
 
 with open('input.txt', 'r') as file:
     input_lines = [int(line.strip()) for line in file]
@@ -39,10 +39,30 @@ try:
 except:
     pass
 
-# TODO:
-# part 2 lmao
+
+
 def part2(input, bad_num):
-    
+    # array holding the numbers to sum
+    # will start out with only 2 numbers, then 3, then 4, etc
+    # arr = []
+
+    # j will be the number of additional numbers to check
+    # range is the number of contiguous numbers to check
+    # starts at 1 to check 2 numbers [i, range]
+    digits = 1
+    while digits < len(input):
+        for i in range(len(input)-1):
+            arr = input[i : digits]
+            test_sum = sum(arr)
+
+            if test_sum == bad_num:
+                max_num = max(arr)
+                min_num = min(arr)
+                print(max_num + min_num)
+                break
+            else:
+                continue
+        digits += 1
 
 
 
