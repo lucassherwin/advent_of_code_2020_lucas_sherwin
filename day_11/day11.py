@@ -16,38 +16,66 @@ with open('example.txt', 'r') as file:
 # If a seat is occupied (#) and four or more seats adjacent to it are also occupied, the seat becomes empty.
 # Otherwise, the seat's state does not change.
 
+# CURRENT ERROR:
+# program is currently not applying the rules to all seats simultainously
+# for example in the first line the # at [0][3] should become a L because the 3 below and one to the left are occupied
+# however the one to the left should also change 
+# currently it is going one by one through the row so the second one does not change
+# possible solution: create a new temp_row array that:
+    # if the seat is a floor
+        # push that onto array
+        # if it is L or # apply rules and change as necessary 
+
+
 def check_adjacent_seats(arr, row, col):
     current = arr[row][col]
     # if there are 4 or more occupied adjacent seats the seat becomes empty
     # count the number of occupied adjacent seats
     count = 0
-    # check if the seat has any occupied adjacent seats
-    # if the seat to the left exists and is occupied
-    # if count becomes greater than 4 we dont need to continue checking the adjacent seats
-    # while count <= 4:
-    if col-1 > 0 and arr[row][col-1] == '#':
-        count += 1
-    # check if the seat above exists and is occupied
-    if row-1 > 0 and arr[row-1][col] == '#':
-        count += 1
-    # check the seat to the right exists and is occupied
-    if col+1 < len(arr[row]) and arr[row][col+1] == '#':
-        count += 1
-    # check the seat below exists and is occupied
-    if row+1 < len(arr) and arr[row+1][col] == '#':
-        count += 1
-    # check if the seat up left exists and is occupied
-    if row-1 > 0 and col-1 > 0 and arr[row-1][col-1] == '#':
-        count += 1
-    # check if the seat up and right exists and is occupied
-    if row-1 > 0 and col+1 < len(arr[row]) and arr[row-1][col+1] == '#':
-        count += 1
-    # check if the seat down and left exists and is occupied
-    if row+1 < len(arr) and col-1 > 0 and arr[row+1][col-1] == '#':
-        count += 1
-    # check if the seat down and right exists and is occupied
-    if row+1 < len(arr) and col+1 < len(arr[row]) and arr[row+1][col+1] == '#':
-        count += 1
+    # temp row will replace the current row
+    temp_row = []
+    # loop over current row
+    # if item is a floor push onto array
+    # if item is a seat
+        # apply rules accordingly
+    # LOOK INTO MOVING THIS INTO THE MAIN FUNCTION AND REFACTOR IT TO USE THE CHECK ADJACENT METHOD 
+    # NO NEEED TO REPEAT THIS SO MUCH
+    for i in range(len(row)):
+        # if the element is a floor
+        if arr[row][i] == '.':
+            # put it on the array and move on
+            temp_row.append(arr[row][i])
+        # if the element is an empty seat
+        if arr[row][i] == 'L':
+            # if there are no occupied adjacent seats
+            # if the seat to the left exists and is occupied
+            if col-1 > 0 and arr[row][col-1] == '#':
+
+        # check if the seat has any occupied adjacent seats
+        # if the seat to the left exists and is occupied
+        if col-1 > 0 and arr[row][col-1] == '#':
+            count += 1
+        # check if the seat above exists and is occupied
+        if row-1 > 0 and arr[row-1][col] == '#':
+            count += 1
+        # check the seat to the right exists and is occupied
+        if col+1 < len(arr[row]) and arr[row][col+1] == '#':
+            count += 1
+        # check the seat below exists and is occupied
+        if row+1 < len(arr) and arr[row+1][col] == '#':
+            count += 1
+        # check if the seat up left exists and is occupied
+        if row-1 > 0 and col-1 > 0 and arr[row-1][col-1] == '#':
+            count += 1
+        # check if the seat up and right exists and is occupied
+        if row-1 > 0 and col+1 < len(arr[row]) and arr[row-1][col+1] == '#':
+            count += 1
+        # check if the seat down and left exists and is occupied
+        if row+1 < len(arr) and col-1 > 0 and arr[row+1][col-1] == '#':
+            count += 1
+        # check if the seat down and right exists and is occupied
+        if row+1 < len(arr) and col+1 < len(arr[row]) and arr[row+1][col+1] == '#':
+            count += 1
     return count
 
 def find_final_seats(input):
